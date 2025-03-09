@@ -1,2 +1,3 @@
 # Control_Insulinas_PRE
-Control de insulinas a nivel intrahospitalario.
+- Control de insulinas a nivel intrahospitalario.
+- - Aplicación web, adaptada para Android.
