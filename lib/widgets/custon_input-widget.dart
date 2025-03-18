@@ -44,6 +44,8 @@ class CustonInput extends StatelessWidget {
           labelText: placeholder,
           labelStyle: TextStyle(color: ColorExacto.colorFondoAzul),
           border: InputBorder.none,
+          suffixText: 'mg/dL',
+          suffixStyle: TextStyle(color: ColorExacto.colornnegroLetras),
         ),
       ),
     );

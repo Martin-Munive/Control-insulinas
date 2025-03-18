@@ -1,4 +1,5 @@
 import 'package:cardiones/pages/pages.dart';
+import 'package:cardiones/providers/providers.dart';
 import 'package:cardiones/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class OpcionesPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // BDProvider.db.database;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -27,19 +29,23 @@ class OpcionesPages extends StatelessWidget {
                   ButtonNavigationIcon(
                     hero: '1',
                     icon: Icons.monitor_heart_rounded,
+                    nombre: 'Calcular Insulina',
                     child: VistaUnoPages(),
                   ),
                   ButtonNavigationIcon(
                       hero: '2',
-                      icon: Icons.coronavirus,
+                      icon: Icons.food_bank_rounded,
+                      nombre: 'Carboihidratos',
                       child: VistaDosPages()),
                   ButtonNavigationIcon(
                       icon: Icons.medical_services_rounded,
                       hero: '3',
+                      nombre: 'Nice-Sugar',
                       child: VistaTresPages()),
                   ButtonNavigationIcon(
                       icon: Icons.medical_information_rounded,
                       hero: '4',
+                      nombre: 'No sabemos',
                       child: VistaCuatroPages()),
                 ],
               )

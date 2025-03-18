@@ -1,7 +1,14 @@
 import 'package:cardiones/design/design.dart';
 import 'package:cardiones/pages/pages.dart';
+import 'package:cardiones/providers/providers.dart';
 import 'package:cardiones/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+final List<String> insulina = [
+  '1700',
+  '2100',
+];
 
 class VistaTresPages extends StatelessWidget {
   static const String routeName = '/VistaTres';
@@ -42,47 +49,46 @@ class _formVistatres extends StatefulWidget {
 }
 
 class __formVistatresState extends State<_formVistatres> {
-  final pulsoCrtl = TextEditingController();
-  final alturaCrtl = TextEditingController();
-  final pesoCrtl = TextEditingController();
+  final sensibilidadCrtl = TextEditingController();
+  final insulinaaldiaCrtl = TextEditingController();
+  String selectInsulina = '1700';
   @override
   Widget build(BuildContext context) {
+    final calInsulina = Provider.of<CalcularInsulinaProvider>(context);
     return Container(
       child: SingleChildScrollView(
         child: Column(
+          spacing: 40,
           children: [
-            CustonInput(
-              icon: Icons.home_repair_service_outlined,
-              hintText: 'Pulso',
-              keyboardType: TextInputType.text,
-              placeholder: 'Pulso',
-              textController: pulsoCrtl,
+            DropdownbuttonWidget(
+              items: insulina,
+              onChanged: (value) {
+                setState(() {
+                  selectInsulina = value;
+                });
+              },
             ),
             CustonInput(
-              icon: Icons.bloodtype,
-              hintText: 'tipo de sangre',
-              keyboardType: TextInputType.text,
-              placeholder: 'tipo de sangre',
-              textController: alturaCrtl,
+              icon: Icons.access_time_filled_rounded,
+              hintText: 'Insulina total por día',
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              placeholder: 'Insulina total por día',
+              textController: insulinaaldiaCrtl,
             ),
-            CustonInput(
-              icon: Icons.person,
-              hintText: 'Nombre',
-              keyboardType: TextInputType.text,
-              placeholder: 'Nombre',
-              textController: pesoCrtl,
-            ),
+            // CustonInput(
+            //   icon: Icons.person,
+            //   hintText: 'Nombre',
+            //   keyboardType: TextInputType.number,
+            //   placeholder: 'Nombre',
+            //   textController: pesoCrtl,
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 50,
               children: [
                 FloatingActionButton(
                   heroTag: 'btn1',
-                  onPressed: () {
-                    print(pulsoCrtl.text);
-                    print(alturaCrtl.text);
-                    print(pesoCrtl.text);
-                  },
+                  onPressed: () {},
                   backgroundColor: Colors.blue,
                   elevation: 5,
                   child: Icon(
@@ -93,9 +99,10 @@ class __formVistatresState extends State<_formVistatres> {
                 FloatingActionButton(
                   heroTag: 'btn2',
                   onPressed: () {
-                    print(pulsoCrtl.text);
-                    print(alturaCrtl.text);
-                    print(pesoCrtl.text);
+                    double? sensibilidad = double.tryParse(selectInsulina);
+                    double? insulinaaldia =
+                        double.tryParse(insulinaaldiaCrtl.text);
+                    calInsulina.calcularRatio(sensibilidad!, insulinaaldia!);
                   },
                   backgroundColor: Colors.blue,
                   elevation: 5,
@@ -105,6 +112,20 @@ class __formVistatresState extends State<_formVistatres> {
                   ),
                 )
               ],
+            ),
+            Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: ColorExacto.colorFondoAzul,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                'Resultado : ${calInsulina.ratio} UI',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14),
+              ),
             )
           ],
         ),
