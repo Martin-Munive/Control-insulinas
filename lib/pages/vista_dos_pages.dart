@@ -61,37 +61,127 @@ class _formVista2 extends StatefulWidget {
 }
 
 class __formVista2State extends State<_formVista2> {
-  String dropdownValue = items.first;
+  String selectedMedico = items.first;
+  String selectedEnfermedad = enfermedad.first;
+  String selectedMedicamento = medicamento.first;
+  final cantidadtextController1 = TextEditingController();
+  final cantidadtextController2 = TextEditingController();
+  final cantidadtextController3 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
-        child: Column(
-          spacing: 40,
+        child: listaDeOpciones(),
+      ),
+    );
+  }
+
+  Column listaDeOpciones() {
+    return Column(
+      spacing: 20,
+      children: [
+        Row(
+          spacing: 10,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            DropdownbuttonWidget(
-              items: items,
-            ),
-            DropdownbuttonWidget(
-              items: enfermedad,
-            ),
-            DropdownbuttonWidget(
-              items: medicamento,
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                print('guardar');
-              },
-              child: Icon(
-                Icons.save,
-                color: ColorExacto.colornnegroLetras,
+            Expanded(
+              child: DropdownbuttonWidget(
+                items: items,
+                onChanged: (String value) {
+                  setState(() {
+                    selectedMedico = value;
+                  });
+                },
               ),
-              backgroundColor: Colors.blue,
-            )
+            ),
+            Expanded(
+              child: CustonInput(
+                  icon: Icons.numbers,
+                  placeholder: 'Cantidad',
+                  textController: cantidadtextController1,
+                  hintText: 'Cantidad',
+                  keyboardType: TextInputType.number),
+            ),
           ],
         ),
+        Row(
+          spacing: 10,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: DropdownbuttonWidget(
+                items: enfermedad,
+                onChanged: (String value) {
+                  setState(() {
+                    selectedEnfermedad = value;
+                  });
+                },
+              ),
+            ),
+            Expanded(
+              child: CustonInput(
+                  icon: Icons.numbers,
+                  placeholder: 'Cantidad',
+                  textController: cantidadtextController2,
+                  hintText: 'Cantidad',
+                  keyboardType: TextInputType.number),
+            ),
+          ],
+        ),
+        Row(
+          spacing: 10,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: DropdownbuttonWidget(
+                items: medicamento,
+                onChanged: (String value) {
+                  setState(() {
+                    selectedMedicamento = value;
+                  });
+                },
+              ),
+            ),
+            Expanded(
+              child: CustonInput(
+                  icon: Icons.numbers,
+                  placeholder: 'Cantidad',
+                  textController: cantidadtextController3,
+                  hintText: 'Cantidad',
+                  keyboardType: TextInputType.number),
+            ),
+          ],
+        ),
+        calcularCarbohidratos(),
+        Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: ColorExacto.colorFondoAzul,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            'Resultado :0.0 UI',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+          ),
+        )
+      ],
+    );
+  }
+
+  FloatingActionButton calcularCarbohidratos() {
+    return FloatingActionButton(
+      onPressed: () {
+        print("Médico seleccionado: $selectedMedico");
+        print("Enfermedad seleccionada: $selectedEnfermedad");
+        print("Medicamento seleccionado: $selectedMedicamento");
+      },
+      child: Icon(
+        Icons.calculate,
+        color: ColorExacto.colornnegroLetras,
       ),
+      backgroundColor: Colors.blue,
     );
   }
 }

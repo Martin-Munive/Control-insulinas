@@ -75,27 +75,20 @@ class __formVistatresState extends State<_formVistatres> {
               placeholder: 'Insulina total por día',
               textController: insulinaaldiaCrtl,
             ),
-            // CustonInput(
-            //   icon: Icons.person,
-            //   hintText: 'Nombre',
-            //   keyboardType: TextInputType.number,
-            //   placeholder: 'Nombre',
-            //   textController: pesoCrtl,
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 50,
               children: [
-                FloatingActionButton(
-                  heroTag: 'btn1',
-                  onPressed: () {},
-                  backgroundColor: Colors.blue,
-                  elevation: 5,
-                  child: Icon(
-                    Icons.filter_frames_outlined,
-                    color: ColorExacto.colornnegroLetras,
-                  ),
-                ),
+                // FloatingActionButton(
+                //   heroTag: 'btn1',
+                //   onPressed: () {},
+                //   backgroundColor: Colors.blue,
+                //   elevation: 5,
+                //   child: Icon(
+                //     Icons.filter_frames_outlined,
+                //     color: ColorExacto.colornnegroLetras,
+                //   ),
+                // ),
                 FloatingActionButton(
                   heroTag: 'btn2',
                   onPressed: () {
@@ -107,28 +100,40 @@ class __formVistatresState extends State<_formVistatres> {
                   backgroundColor: Colors.blue,
                   elevation: 5,
                   child: Icon(
-                    Icons.list_alt_outlined,
+                    Icons.calculate,
                     color: ColorExacto.colornnegroLetras,
                   ),
                 )
               ],
             ),
-            Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: ColorExacto.colorFondoAzul,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                'Resultado : ${calInsulina.ratio} UI',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14),
-              ),
-            )
+            CalcularInsulina(calInsulina: calInsulina)
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CalcularInsulina extends StatelessWidget {
+  const CalcularInsulina({
+    super.key,
+    required this.calInsulina,
+  });
+
+  final CalcularInsulinaProvider calInsulina;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: ColorExacto.colorFondoAzul,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        'Resultado : ${calInsulina.ratio} UI',
+        style: TextStyle(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
       ),
     );
   }

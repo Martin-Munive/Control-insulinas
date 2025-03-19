@@ -1,5 +1,4 @@
 import 'package:cardiones/pages/pages.dart';
-import 'package:cardiones/providers/providers.dart';
 import 'package:cardiones/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -43,9 +42,9 @@ class OpcionesPages extends StatelessWidget {
                       nombre: 'Nice-Sugar',
                       child: VistaTresPages()),
                   ButtonNavigationIcon(
-                      icon: Icons.medical_information_rounded,
+                      icon: Icons.list_alt_rounded,
                       hero: '4',
-                      nombre: 'No sabemos',
+                      nombre: 'Referencias',
                       child: VistaCuatroPages()),
                 ],
               )

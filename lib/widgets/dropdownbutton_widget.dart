@@ -53,11 +53,12 @@ class _DropdownbuttonWidgetState extends State<DropdownbuttonWidget> {
             height: 2,
           ),
           onChanged: (String? value) {
-            // This is called when the user selects an item.
-            setState(() {
-              dropdownValue = value!;
-            });
-            print(value);
+            if (value != null) {
+              setState(() {
+                dropdownValue = value;
+              });
+              widget.onChanged?.call(value);
+            }
           },
           items: widget.items.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(value: value, child: Text(value));

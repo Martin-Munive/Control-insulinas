@@ -100,22 +100,34 @@ class __formVista1State extends State<_formVista1> {
             SizedBox(
               height: 40,
             ),
-            Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: ColorExacto.colorFondoAzul,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                'Resultado : ${calculorProvider.resultado} UI',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14),
-              ),
-            )
+            Resultado(calculorProvider: calculorProvider)
           ],
         ),
+      ),
+    );
+  }
+}
+
+class Resultado extends StatelessWidget {
+  const Resultado({
+    super.key,
+    required this.calculorProvider,
+  });
+
+  final CalculosProvider calculorProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: ColorExacto.colorFondoAzul,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        'Resultado : ${calculorProvider.resultado} UI',
+        style: TextStyle(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
       ),
     );
   }
