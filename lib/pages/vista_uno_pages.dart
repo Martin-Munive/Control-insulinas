@@ -71,7 +71,7 @@ class __formVista1State extends State<_formVista1> {
               textController: glucosaMetaCrtl,
             ),
             CustonInput(
-              icon: Icons.sensor_occupied,
+              icon: Icons.settings_input_antenna_outlined,
               hintText: 'Factor de sensibilidad',
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               placeholder: ' Factor de sensibilidad',
@@ -93,8 +93,8 @@ class __formVista1State extends State<_formVista1> {
               backgroundColor: Colors.blue,
               elevation: 5,
               child: Icon(
-                Icons.list_alt_outlined,
-                color: ColorExacto.colornnegroLetras,
+                Icons.calculate,
+                color: ColorExacto.colorBlanco,
               ),
             ),
             SizedBox(

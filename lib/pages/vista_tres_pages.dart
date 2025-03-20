@@ -69,7 +69,7 @@ class __formVistatresState extends State<_formVistatres> {
               },
             ),
             CustonInput(
-              icon: Icons.access_time_filled_rounded,
+              icon: Icons.pending_actions,
               hintText: 'Insulina total por día',
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               placeholder: 'Insulina total por día',
@@ -91,7 +91,7 @@ class __formVistatresState extends State<_formVistatres> {
                   elevation: 5,
                   child: Icon(
                     Icons.calculate,
-                    color: ColorExacto.colornnegroLetras,
+                    color: ColorExacto.colorBlanco,
                   ),
                 )
               ],

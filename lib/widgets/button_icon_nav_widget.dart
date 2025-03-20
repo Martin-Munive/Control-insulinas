@@ -36,13 +36,13 @@ class ButtonNavigationIcon extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: ColorExacto.colornnegroLetras,
+                color: ColorExacto.colorBlanco,
                 size: 40,
               ),
               Text(
                 nombre,
                 style: TextStyle(
-                    color: ColorExacto.colornnegroLetras,
+                    color: ColorExacto.colorBlanco,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
               )

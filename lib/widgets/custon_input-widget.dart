@@ -40,7 +40,6 @@ class CustonInput extends StatelessWidget {
             color: ColorExacto.colornnegroLetras,
           ),
           hintText: hintText,
-          hintStyle: TextStyle(color: ColorExacto.colornnegroLetras),
           labelText: placeholder,
           labelStyle: TextStyle(color: ColorExacto.colorFondoAzul),
           border: InputBorder.none,

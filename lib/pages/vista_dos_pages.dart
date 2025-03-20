@@ -33,10 +33,12 @@ class VistaDosPages extends StatelessWidget {
         body: Container(
           padding:
               const EdgeInsets.only(top: 40, bottom: 20, left: 20, right: 20),
-          child: Column(
-            children: [
-              _formVista2(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _formVista2(),
+              ],
+            ),
           ),
         ),
       ),
@@ -90,7 +92,7 @@ class __formVista2State extends State<_formVista2> {
         filaDropdownConInput(2, selected2, cantidadtextController2),
         filaDropdownConInput(3, selected3, cantidadtextController3),
         CustonInputCantidad(
-          icon: Icons.access_time_filled_rounded,
+          icon: Icons.pending_actions,
           hintText: 'Insulina',
           keyboardType: TextInputType.number,
           placeholder: 'Insulina',
@@ -170,7 +172,7 @@ class __formVista2State extends State<_formVista2> {
       },
       child: Icon(
         Icons.calculate,
-        color: ColorExacto.colornnegroLetras,
+        color: ColorExacto.colorBlanco,
       ),
       backgroundColor: Colors.blue,
     );
