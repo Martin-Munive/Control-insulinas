@@ -4,53 +4,60 @@ import 'package:flutter/material.dart';
 
 class OpcionesPages extends StatelessWidget {
   static const String name = "/OpcionesPages";
+
   const OpcionesPages({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // BDProvider.db.database;
+    final size = MediaQuery.of(context).size; // Obtiene tamaño de pantalla
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
           padding: EdgeInsets.only(bottom: 20, left: 20, right: 20),
-          child: Column(
-            spacing: 40,
-            children: [
-              Logo(),
-              GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 2,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
-                childAspectRatio: 1,
-                children: [
-                  ButtonNavigationIcon(
-                    hero: '1',
-                    icon: Icons.monitor_heart_rounded,
-                    nombre: 'Calcular Insulina',
-                    child: VistaUnoPages(),
-                  ),
-                  ButtonNavigationIcon(
-                      hero: '2',
-                      icon: Icons.food_bank_rounded,
-                      nombre: 'Carboihidratos',
-                      child: VistaDosPages()),
-                  ButtonNavigationIcon(
-                      icon: Icons.medical_services_rounded,
-                      hero: '3',
-                      nombre: 'Nice-Sugar',
-                      child: VistaTresPages()),
-                  ButtonNavigationIcon(
-                      icon: Icons.list_alt_rounded,
-                      hero: '4',
-                      nombre: 'Referencias',
-                      child: VistaCuatroPages()),
-                ],
-              )
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Logo(),
+                SizedBox(height: 20), // Espaciado extra
+                GridView.count(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(), // Evita doble scroll
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
+                  childAspectRatio:
+                      size.width / (size.height * 0.6), // Ajuste dinámico
+                  children: [
+                    _buildButton(context, '1', Icons.monitor_heart_rounded,
+                        'Calcular Insulina', VistaUnoPages()),
+                    _buildButton(context, '2', Icons.food_bank_rounded,
+                        'Carbohidratos', VistaDosPages()),
+                    _buildButton(context, '3', Icons.medical_services_rounded,
+                        'Nice-Sugar', VistaTresPages()),
+                    _buildButton(context, '4', Icons.list_alt_rounded,
+                        'Referencias', VistaCuatroPages()),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildButton(BuildContext context, String hero, IconData icon,
+      String nombre, Widget child) {
+    final size = MediaQuery.of(context).size;
+    return SizedBox(
+      height: size.height * 0.2, // Ajusta según el alto de la pantalla
+      child: ButtonNavigationIcon(
+        hero: hero,
+        icon: icon,
+        nombre: nombre,
+        child: child,
       ),
     );
   }
