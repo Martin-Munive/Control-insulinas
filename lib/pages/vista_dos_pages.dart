@@ -1,26 +1,10 @@
 import 'package:cardiones/design/design.dart';
+import 'package:cardiones/models/models.dart';
 import 'package:cardiones/pages/pages.dart';
+import 'package:cardiones/providers/providers.dart';
 import 'package:cardiones/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-
-final List<String> items = [
-  'Medico Pediatra',
-  'Medico General',
-  'Medico Internista',
-  'Medico Cardiologo',
-];
-final List<String> enfermedad = [
-  'coronavirus',
-  'fiebre',
-  'tos seca',
-  'ojitivitis',
-];
-final List<String> medicamento = [
-  'Acetaminofen',
-  'Dolex',
-  'Ibuprofeno',
-  'Paracetamol',
-];
+import 'package:provider/provider.dart';
 
 class VistaDosPages extends StatelessWidget {
   static const String routerName = '/VistaDos';
@@ -29,29 +13,34 @@ class VistaDosPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Vista Dos'),
-        backgroundColor: Colors.blue,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pushNamed(context, OpcionesPages.name);
-          },
-          icon: Icon(Icons.arrow_back),
-          color: ColorExacto.colornnegroLetras,
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Vista Dos'),
+          backgroundColor: Colors.blue,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, OpcionesPages.name);
+              final carboProvider =
+                  Provider.of<CalcularCarbohidratos>(context, listen: false);
+              carboProvider.carbohidratos = 0;
+            },
+            icon: Icon(Icons.arrow_back),
+            color: ColorExacto.colornnegroLetras,
+          ),
+        ),
+        body: Container(
+          padding:
+              const EdgeInsets.only(top: 40, bottom: 20, left: 20, right: 20),
+          child: Column(
+            children: [
+              _formVista2(),
+            ],
+          ),
         ),
       ),
-      body: Container(
-        padding:
-            const EdgeInsets.only(top: 40, bottom: 20, left: 20, right: 20),
-        child: Column(
-          children: [
-            _formVista2(),
-          ],
-        ),
-      ),
-    ));
+    );
   }
 }
 
@@ -61,97 +50,51 @@ class _formVista2 extends StatefulWidget {
 }
 
 class __formVista2State extends State<_formVista2> {
-  String selectedMedico = items.first;
-  String selectedEnfermedad = enfermedad.first;
-  String selectedMedicamento = medicamento.first;
+  List<Map<String, dynamic>> items = alimentos
+      .map((alimento) => {
+            "nombre": "${alimento.nombre} - ${alimento.tamanoporcion}",
+            "pesoengramo": alimento.pesoengramo,
+            "gramochos": alimento.gramochos,
+          })
+      .toList();
+
+  String selected1 = alimentos.first.nombre;
+  String selected2 = alimentos.first.nombre;
+  String selected3 = alimentos.first.nombre;
+
   final cantidadtextController1 = TextEditingController();
   final cantidadtextController2 = TextEditingController();
   final cantidadtextController3 = TextEditingController();
+  final insulinaController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
-        child: listaDeOpciones(),
+        child: Column(
+          children: [
+            listaDeOpciones(),
+          ],
+        ),
       ),
     );
   }
 
   Column listaDeOpciones() {
+    final carboProvider = Provider.of<CalcularCarbohidratos>(context);
     return Column(
       spacing: 20,
       children: [
-        Row(
-          spacing: 10,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: DropdownbuttonWidget(
-                items: items,
-                onChanged: (String value) {
-                  setState(() {
-                    selectedMedico = value;
-                  });
-                },
-              ),
-            ),
-            Expanded(
-              child: CustonInput(
-                  icon: Icons.numbers,
-                  placeholder: 'Cantidad',
-                  textController: cantidadtextController1,
-                  hintText: 'Cantidad',
-                  keyboardType: TextInputType.number),
-            ),
-          ],
-        ),
-        Row(
-          spacing: 10,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: DropdownbuttonWidget(
-                items: enfermedad,
-                onChanged: (String value) {
-                  setState(() {
-                    selectedEnfermedad = value;
-                  });
-                },
-              ),
-            ),
-            Expanded(
-              child: CustonInput(
-                  icon: Icons.numbers,
-                  placeholder: 'Cantidad',
-                  textController: cantidadtextController2,
-                  hintText: 'Cantidad',
-                  keyboardType: TextInputType.number),
-            ),
-          ],
-        ),
-        Row(
-          spacing: 10,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: DropdownbuttonWidget(
-                items: medicamento,
-                onChanged: (String value) {
-                  setState(() {
-                    selectedMedicamento = value;
-                  });
-                },
-              ),
-            ),
-            Expanded(
-              child: CustonInput(
-                  icon: Icons.numbers,
-                  placeholder: 'Cantidad',
-                  textController: cantidadtextController3,
-                  hintText: 'Cantidad',
-                  keyboardType: TextInputType.number),
-            ),
-          ],
+        filaDropdownConInput(1, selected1, cantidadtextController1),
+        filaDropdownConInput(2, selected2, cantidadtextController2),
+        filaDropdownConInput(3, selected3, cantidadtextController3),
+        CustonInputCantidad(
+          icon: Icons.access_time_filled_rounded,
+          hintText: 'Insulina',
+          keyboardType: TextInputType.number,
+          placeholder: 'Insulina',
+          textController: insulinaController,
         ),
         calcularCarbohidratos(),
         Container(
@@ -161,7 +104,7 @@ class __formVista2State extends State<_formVista2> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
-            'Resultado :0.0 UI',
+            'Resultado: ${carboProvider.carbohidratos} UI',
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
           ),
@@ -170,12 +113,60 @@ class __formVista2State extends State<_formVista2> {
     );
   }
 
+  Widget filaDropdownConInput(
+      int index, String selected, TextEditingController controller) {
+    return Row(
+      spacing: 10,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: DropdownbuttonWidget(
+            items: items,
+            onChanged: (String value) {
+              setState(() {
+                if (index == 1) selected1 = value;
+                if (index == 2) selected2 = value;
+                if (index == 3) selected3 = value;
+              });
+            },
+          ),
+        ),
+        Expanded(
+          child: CustonInputCantidad(
+            icon: Icons.numbers,
+            placeholder: 'Cantidad',
+            textController: controller,
+            hintText: 'Cantidad',
+            keyboardType: TextInputType.number,
+          ),
+        ),
+      ],
+    );
+  }
+
   FloatingActionButton calcularCarbohidratos() {
     return FloatingActionButton(
       onPressed: () {
-        print("Médico seleccionado: $selectedMedico");
-        print("Enfermedad seleccionada: $selectedEnfermedad");
-        print("Medicamento seleccionado: $selectedMedicamento");
+        int? cantidad1 = int.tryParse(cantidadtextController1.text) ?? 0;
+        int? cantidad2 = int.tryParse(cantidadtextController2.text) ?? 0;
+        int? cantidad3 = int.tryParse(cantidadtextController3.text) ?? 0;
+        final carboProvider =
+            Provider.of<CalcularCarbohidratos>(context, listen: false);
+        carboProvider.carbohidratos = 0.0;
+        carboProvider.calcularCarbohidratos(
+            cantidad1,
+            items.firstWhere(
+                (element) => element['nombre'] == selected1)['gramochos']);
+        carboProvider.calcularCarbohidratos(
+            cantidad2,
+            items.firstWhere(
+                (element) => element['nombre'] == selected2)['gramochos']);
+        carboProvider.calcularCarbohidratos(
+            cantidad3,
+            items.firstWhere(
+                (element) => element['nombre'] == selected3)['gramochos']);
+        carboProvider
+            .dosisInsulina(double.tryParse(insulinaController.text) ?? 0.0);
       },
       child: Icon(
         Icons.calculate,

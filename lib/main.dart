@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => CalculosProvider()),
         ChangeNotifierProvider(create: (_) => CalcularInsulinaProvider()),
+        ChangeNotifierProvider(create: (_) => CalcularCarbohidratos()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

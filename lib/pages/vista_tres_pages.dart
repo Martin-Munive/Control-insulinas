@@ -60,7 +60,7 @@ class __formVistatresState extends State<_formVistatres> {
         child: Column(
           spacing: 40,
           children: [
-            DropdownbuttonWidget(
+            DropdownInsulina(
               items: insulina,
               onChanged: (value) {
                 setState(() {
@@ -79,16 +79,6 @@ class __formVistatresState extends State<_formVistatres> {
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 50,
               children: [
-                // FloatingActionButton(
-                //   heroTag: 'btn1',
-                //   onPressed: () {},
-                //   backgroundColor: Colors.blue,
-                //   elevation: 5,
-                //   child: Icon(
-                //     Icons.filter_frames_outlined,
-                //     color: ColorExacto.colornnegroLetras,
-                //   ),
-                // ),
                 FloatingActionButton(
                   heroTag: 'btn2',
                   onPressed: () {
