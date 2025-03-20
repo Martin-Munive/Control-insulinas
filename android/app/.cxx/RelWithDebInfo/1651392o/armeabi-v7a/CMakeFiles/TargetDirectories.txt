@@ -1,0 +1,2 @@
+C:/Users/i_dav/Documents/ProyectFlutters/cardiones/android/app/.cxx/RelWithDebInfo/1651392o/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/i_dav/Documents/ProyectFlutters/cardiones/android/app/.cxx/RelWithDebInfo/1651392o/armeabi-v7a/CMakeFiles/rebuild_cache.dir
