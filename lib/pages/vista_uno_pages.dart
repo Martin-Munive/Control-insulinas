@@ -3,6 +3,10 @@ import 'package:cardiones/pages/pages.dart';
 import 'package:cardiones/providers/providers.dart';
 import 'package:cardiones/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:lucide_icons_flutter/lucide_icons.dart';
+>>>>>>> Isaac-v/master
 import 'package:provider/provider.dart';
 
 class VistaUnoPages extends StatelessWidget {
@@ -71,7 +75,11 @@ class __formVista1State extends State<_formVista1> {
               textController: glucosaMetaCrtl,
             ),
             CustonInput(
+<<<<<<< HEAD
               icon: Icons.settings_input_antenna_outlined,
+=======
+              icon: LucideIcons.radar,
+>>>>>>> Isaac-v/master
               hintText: 'Factor de sensibilidad',
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               placeholder: ' Factor de sensibilidad',
