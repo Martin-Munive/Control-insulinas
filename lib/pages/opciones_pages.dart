@@ -1,5 +1,6 @@
 import 'package:cardiones/pages/pages.dart';
 import 'package:cardiones/widgets/widgets.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/material.dart';
 
 class OpcionesPages extends StatelessWidget {
@@ -30,11 +31,11 @@ class OpcionesPages extends StatelessWidget {
                   childAspectRatio:
                       size.width / (size.height * 0.6), // Ajuste dinámico
                   children: [
-                    _buildButton(context, '1', Icons.monitor_heart_rounded,
+                    _buildButton(context, '1', LucideIcons.syringe,
                         'Calcular Insulina', VistaUnoPages()),
-                    _buildButton(context, '2', Icons.food_bank_rounded,
+                    _buildButton(context, '2', LucideIcons.utensils,
                         'Carbohidratos', VistaDosPages()),
-                    _buildButton(context, '3', Icons.medical_services_rounded,
+                    _buildButton(context, '3', LucideIcons.candyOff,
                         'Nice-Sugar', VistaTresPages()),
                     _buildButton(context, '4', Icons.list_alt_rounded,
                         'Referencias', VistaCuatroPages()),
